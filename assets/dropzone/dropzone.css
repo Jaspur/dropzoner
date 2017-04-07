@@ -198,13 +198,16 @@
     display: inline-block;
     vertical-align: top;
     margin: 16px;
-    min-height: 100px; }
+    min-height: 20px;
+    padding: 10px 5px;
+    width: 100%; }
     .dropzone .dz-preview:hover {
       z-index: 1000; }
       .dropzone .dz-preview:hover .dz-details {
         opacity: 1; }
     .dropzone .dz-preview.dz-file-preview .dz-image {
-      border-radius: 20px;
+      border-radius: 0;
+      width: 100%;
       background: #999;
       background: linear-gradient(to bottom, #eee, #ddd); }
     .dropzone .dz-preview.dz-file-preview .dz-details {
@@ -237,7 +240,7 @@
       min-width: 100%;
       max-width: 100%;
       padding: 2em 1em;
-      text-align: center;
+      text-align: left;
       color: rgba(0, 0, 0, 0.9);
       line-height: 150%; }
       .dropzone .dz-preview .dz-details .dz-size {
