@@ -9,7 +9,7 @@ use Jaspur\Dropzoner\Repositories\UploadRepository;
 class DropzonerController extends Controller
 {
     /**
-     * Upload image methods
+     * Upload file methods
      *
      * @var UploadRepository
      */

@@ -26,10 +26,10 @@ class UploadRepository
             ], 400);
         }
 
-        $img = $input['file'];
+        $file = $input['file'];
 
-        $original_name                   = $img->getClientOriginalName();
-        $extension                       = $img->getClientOriginalExtension();
+        $original_name                   = $file->getClientOriginalName();
+        $extension                       = $file->getClientOriginalExtension();
         $original_name_without_extension = substr($original_name, 0, strlen($original_name) - strlen($extension) - 1);
 
         $filename         = $this->sanitize($original_name_without_extension);
@@ -37,10 +37,10 @@ class UploadRepository
 
         $filename_with_extension = $allowed_filename . '.' . $extension;
 
-        $img->storeAs(config('dropzoner.upload-path'), $filename_with_extension);
+        $file->storeAs(config('dropzoner.upload-path'), $filename_with_extension);
 
         //Fire FileWasUploaded Event
-        event(new FileWasUploaded($original_name, $filename_with_extension));
+        event(new FileWasUploaded($original_name, $filename_with_extension, $extension));
 
         return response()->json([
             'error'    => false,

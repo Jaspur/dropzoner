@@ -1,5 +1,4 @@
 <?php
 
-$s = 'dropzoner.';
-Route::post('dropzoner/upload', ['as' => $s . 'upload', 'uses' => 'DropzonerController@postUpload']);
-Route::post('dropzoner/delete', ['as' => $s . 'delete', 'uses' => 'DropzonerController@postDelete']);
+Route::post('dropzoner/upload', ['as' => 'dropzoner.upload', 'uses' => 'DropzonerController@postUpload']);
+Route::post('dropzoner/delete', ['as' => 'dropzoner.delete', 'uses' => 'DropzonerController@postDelete']);
