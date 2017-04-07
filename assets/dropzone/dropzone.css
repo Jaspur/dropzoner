@@ -401,7 +401,7 @@
   .dropzone .dz-preview {
     position: relative;
     display: inline-block;
-    width: 120px;
+    width: 100%;
     margin: 0.5em; }
     .dropzone .dz-preview .dz-progress {
       display: block;
