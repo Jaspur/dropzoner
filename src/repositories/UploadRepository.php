@@ -13,7 +13,7 @@ class UploadRepository
      * @param $input
      * @return mixed
      */
-    public function upload($input, $id = null)
+    public function upload($input, $id = null, $user)
     {
         $validator = \Validator::make($input, config('dropzoner.validator'), config('dropzoner.validator-messages'));
 
@@ -40,7 +40,7 @@ class UploadRepository
         $file->storeAs(config('dropzoner.upload-path'), $filename_with_extension);
 
         //Fire FileWasUploaded Event
-        event(new FileWasUploaded($original_name, $filename_with_extension, $extension, $id, auth()->user()->id));
+        event(new FileWasUploaded($original_name, $filename_with_extension, $extension, $id, $user));
 
         return response()->json([
             'error'    => false,
