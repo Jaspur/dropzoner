@@ -11,6 +11,7 @@
 
         <div class="dropzone-previews" id="dropzonePreview"></div>
 
+        <!--
         <center>
             <p class="button is-primary is-large">
                 <span class="icon is-medium">
@@ -19,6 +20,7 @@
                 <span>Upload</span>
             </p>
          </center>
+         -->
     </form>
 
 </div>

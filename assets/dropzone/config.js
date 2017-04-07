@@ -2,13 +2,13 @@ Dropzone.options.dropzonersDropzone = {
 
     uploadMultiple: false,//will not work for multiple uploads
     parallelUploads: 100,
-    maxFilesize: 8,
+    maxFilesize: 50,
     acceptedFiles: 'image/*',
     previewsContainer: '#dropzonePreview',
     previewTemplate: document.querySelector('#preview-template').innerHTML,
-    addRemoveLinks: true,
+    addRemoveLinks: false,
     dictRemoveFile: 'Remove',
-    dictFileTooBig: 'Image is bigger than 8MB',
+    dictFileTooBig: 'File is bigger than 50MB',
 
     // The setting up of the dropzone
     init:function() {
