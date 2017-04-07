@@ -17,7 +17,7 @@
 
 
 <!-- Dropzone Preview Template -->
-<div id="preview-template" foobar-style="display: none;">
+<div id="preview-template" style="display: none;">
 
     <div class="dz-preview dz-file-preview">
         <div class="dz-image"><img data-dz-thumbnail=""></div>
