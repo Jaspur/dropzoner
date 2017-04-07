@@ -9,13 +9,15 @@ class FileWasUploaded extends Event
     public $extension;
     public $id;
     public $user;
+    public $type;
 
-    public function __construct($original_filename, $server_filename, $extension, $id, $user)
+    public function __construct($original_filename, $server_filename, $extension, $id, $user, $type)
     {
         $this->original_filename = $original_filename;
         $this->server_filename   = $server_filename;
         $this->extension         = $extension;
         $this->id                = $id;
         $this->user              = $user;
+        $this->type              = $type;
     }
 }

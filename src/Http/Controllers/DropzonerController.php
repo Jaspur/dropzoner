@@ -28,7 +28,7 @@ class DropzonerController extends Controller
     public function postUpload(Request $request)
     {
         $input    = $request->all();
-        $response = $this->uploadRepository->upload($input, $request->get('id'), $request->get('user'));
+        $response = $this->uploadRepository->upload($input, $request->get('id'), $request->get('user'), $request->get('type'));
         return $response;
     }
 
