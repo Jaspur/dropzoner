@@ -4,6 +4,7 @@
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <input type="hidden" name="id" value="<?php echo @$id; ?>">
         <input type="hidden" name="user" value="<?php echo @$user; ?>">
+        <input type="hidden" name="type" value="<?php echo @$type; ?>">
 
         <div class="dz-message"></div>
 
