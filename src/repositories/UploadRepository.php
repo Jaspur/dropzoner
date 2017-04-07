@@ -40,7 +40,7 @@ class UploadRepository
         $file->storeAs(config('dropzoner.upload-path'), $filename_with_extension);
 
         //Fire FileWasUploaded Event
-        event(new FileWasUploaded($original_name, $filename_with_extension, $extension, $id));
+        event(new FileWasUploaded($original_name, $filename_with_extension, $extension, $id, auth()->user()->id));
 
         return response()->json([
             'error'    => false,
