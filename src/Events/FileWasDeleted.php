@@ -1,8 +1,8 @@
 <?php
 
-namespace Codingo\Dropzoner\Events;
+namespace Jaspur\Dropzoner\Events;
 
-class ImageWasDeleted extends Event
+class FileWasDeleted extends Event
 {
     public $server_filename;
 

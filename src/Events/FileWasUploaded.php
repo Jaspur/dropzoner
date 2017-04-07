@@ -1,8 +1,8 @@
 <?php
 
-namespace Codingo\Dropzoner\Events;
+namespace Jaspur\Dropzoner\Events;
 
-class ImageWasUploaded extends Event
+class FileWasUploaded extends Event
 {
     public $original_filename;
 
@@ -11,6 +11,6 @@ class ImageWasUploaded extends Event
     public function __construct($original_filename, $server_filename)
     {
         $this->original_filename = $original_filename;
-        $this->server_filename = $server_filename;
+        $this->server_filename   = $server_filename;
     }
 }

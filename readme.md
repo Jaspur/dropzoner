@@ -1,12 +1,12 @@
-# Dropzoner - Laravel package for image upload using DropzoneJS 
+# Dropzoner - Laravel package for image upload using DropzoneJS
 
 [![Software License][ico-license]](https://github.com/codingo-me/dropzoner/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/codingo-me/dropzoner.svg?style=flat-square)](https://packagist.org/packages/codingo-me/dropzoner)
 
-This is the simplest Laravel package for image uploads using DropzoneJS. 
+This is the simplest Laravel package for image uploads using DropzoneJS.
 
-You pull it via composer, set service provider and include it in your views with **@include('dropzoner::dropzone')**. After this you need to set JS and CSS files in header and footer. 
-Dropzone will take full width of parent container, and will throw events on image upload and image delete actions. 
+You pull it via composer, set service provider and include it in your views with **@include('dropzoner::dropzone')**. After this you need to set JS and CSS files in header and footer.
+Dropzone will take full width of parent container, and will throw events on image upload and image delete actions.
 Using event listeners you can hook this package with the rest of your application.
 
 Package uses Image Intervention library for saving images. It has its own filename sanitizer and method for creating unique filenames inside upload directory.
@@ -22,9 +22,9 @@ composer require codingo-me/dropzoner
 Now modify app.php config file and add Dropzoner Service Provider.
 
 ```php
-        Codingo\Dropzoner\DropzonerServiceProvider::class
+        Jaspur\Dropzoner\DropzonerServiceProvider::class
 ```
- 
+
 After setting service provider you need to publish Dropzoners configuration file and assets:
 
 ```shell
@@ -37,7 +37,7 @@ You also need to add upload path into .env file using key **DROPZONER_UPLOAD_PAT
 
 ### Namespace
 
-Package uses **Codingo\Dropzoner** namespace.
+Package uses **Jaspur\Dropzoner** namespace.
 
 ### Assets
 
@@ -47,7 +47,7 @@ In head section of your page add DropzoneJS stylesheet file.
 <link rel="stylesheet" href="<?php echo asset('vendor/dropzoner/dropzone/dropzone.min.css'); ?>">
 ```
 
-Above body closing tag add DropzoneJS JavaScript file, jQuery library and DropzoneJS custom configuration file. 
+Above body closing tag add DropzoneJS JavaScript file, jQuery library and DropzoneJS custom configuration file.
 We are using jQuery file in custom configuration file, for AJAX requests to backend.
 
 ```
@@ -58,13 +58,13 @@ We are using jQuery file in custom configuration file, for AJAX requests to back
 
 ### Including DropzoneJS upload widget
 
-You can include DropzoneJS widget in your HTML with: 
+You can include DropzoneJS widget in your HTML with:
 
 ```php
     @include('dropzoner::dropzone')
 ```
 
-It will take full-width of parent div. That view consists of upload form and preview template. 
+It will take full-width of parent div. That view consists of upload form and preview template.
 
 ### Removal
 
@@ -74,22 +74,22 @@ By default each uploaded image will have **Remove** link. You can disable this f
 
 Idea behind this package is to have plug and play functionality, but you may need to hook upload and delete action with your application so we have 2 events.
 
-* ImageWasUploaded
-* ImageWasDeleted
+* FileWasUploaded
+* FileWasDeleted
 
-**ImageWasUploaded** has 2 properties: $original_filename and $server_filename
-**ImageWasDeleted** has 1 property: $server_filename
+**FileWasUploaded** has 2 properties: $original_filename and $server_filename
+**FileWasDeleted** has 1 property: $server_filename
 
 #### Example Listener
 
-This is a simple listener for ImageWasUploaded events.
+This is a simple listener for FileWasUploaded events.
 
 ```php
 <?php
 
 namespace App\Listeners;
 
-use Codingo\Dropzoner\Events\ImageWasUploaded;
+use Jaspur\Dropzoner\Events\FileWasUploaded;
 
 class ImageUploadListener
 {
@@ -98,9 +98,9 @@ class ImageUploadListener
      * Event carries original_filename
      * and server_filename
      *
-     * @param ImageWasUploaded $event
+     * @param FileWasUploaded $event
      */
-    public function handle(ImageWasUploaded $event)
+    public function handle(FileWasUploaded $event)
     {
         \Log::info('Inside ImageUploadListener, image was uploaded: ' . $event->server_filename);
     }

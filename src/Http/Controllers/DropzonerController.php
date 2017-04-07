@@ -1,10 +1,10 @@
 <?php
 
-namespace Codingo\Dropzoner\Http\Controllers;
+namespace Jaspur\Dropzoner\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Codingo\Dropzoner\Repositories\UploadRepository;
+use Jaspur\Dropzoner\Repositories\UploadRepository;
 
 class DropzonerController extends Controller
 {
@@ -27,7 +27,7 @@ class DropzonerController extends Controller
      */
     public function postUpload(Request $request)
     {
-        $input = $request->all();
+        $input    = $request->all();
         $response = $this->uploadRepository->upload($input);
         return $response;
     }

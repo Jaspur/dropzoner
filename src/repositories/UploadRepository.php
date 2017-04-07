@@ -1,10 +1,9 @@
 <?php
 
-namespace Codingo\Dropzoner\Repositories;
+namespace Jaspur\Dropzoner\Repositories;
 
-use Codingo\Dropzoner\Events\ImageWasDeleted;
-use Codingo\Dropzoner\Events\ImageWasUploaded;
-use Intervention\Image\ImageManager;
+use Jaspur\Dropzoner\Events\FileWasDeleted;
+use Jaspur\Dropzoner\Events\FileWasUploaded;
 
 class UploadRepository
 {
@@ -21,43 +20,32 @@ class UploadRepository
         if ($validator->fails()) {
 
             return response()->json([
-                'error' => true,
+                'error'   => true,
                 'message' => $validator->messages()->first(),
-                'code' => 400
+                'code'    => 400,
             ], 400);
         }
 
-        $photo = $input['file'];
+        $img = $input['file'];
 
-        $original_name = $photo->getClientOriginalName();
-        $extension = $photo->getClientOriginalExtension();
+        $original_name                   = $img->getClientOriginalName();
+        $extension                       = $img->getClientOriginalExtension();
         $original_name_without_extension = substr($original_name, 0, strlen($original_name) - strlen($extension) - 1);
 
-        $filename = $this->sanitize($original_name_without_extension);
-        $allowed_filename = $this->createUniqueFilename( $filename );
+        $filename         = $this->sanitize($original_name_without_extension);
+        $allowed_filename = $this->createUniqueFilename($filename);
 
-        $filename_with_extension = $allowed_filename .'.' . $extension;
+        $filename_with_extension = $allowed_filename . '.' . $extension;
 
-        $manager = new ImageManager();
-        $image = $manager->make( $photo )->save(config('dropzoner.upload-path') . $filename_with_extension );
+        $img->storeAs(config('dropzoner.upload-path'), $filename_with_extension);
 
-        if( !$image ) {
-
-            return response()->json([
-                'error' => true,
-                'message' => 'Server error while uploading',
-                'code' => 500
-            ], 500);
-
-        }
-
-        //Fire ImageWasUploaded Event
-        event(new ImageWasUploaded($original_name, $filename_with_extension));
+        //Fire FileWasUploaded Event
+        event(new FileWasUploaded($original_name, $filename_with_extension));
 
         return response()->json([
-            'error' => false,
-            'code'  => 200,
-            'filename' => $filename_with_extension
+            'error'    => false,
+            'code'     => 200,
+            'filename' => $filename_with_extension,
         ], 200);
     }
 
@@ -77,11 +65,11 @@ class UploadRepository
             \File::delete($full_path);
         }
 
-        event(new ImageWasDeleted($server_filename));
+        event(new FileWasDeleted($server_filename));
 
         return response()->json([
             'error' => false,
-            'code'  => 200
+            'code'  => 200,
         ], 200);
     }
 
@@ -92,9 +80,9 @@ class UploadRepository
      * @param $filename
      * @return string
      */
-    private function createUniqueFilename( $filename )
+    private function createUniqueFilename($filename)
     {
-        $full_size_dir = config('dropzoner.upload-path');
+        $full_size_dir   = config('dropzoner.upload-path');
         $full_image_path = $full_size_dir . $filename . '.jpg';
 
         if (\File::exists($full_image_path)) {
@@ -122,9 +110,9 @@ class UploadRepository
         $clean = preg_replace('/\s+/', "-", $clean);
 
         return ($force_lowercase) ?
-            (function_exists('mb_strtolower')) ?
-                mb_strtolower($clean, 'UTF-8') :
-                strtolower($clean) :
-            $clean;
+        (function_exists('mb_strtolower')) ?
+        mb_strtolower($clean, 'UTF-8') :
+        strtolower($clean) :
+        $clean;
     }
 }

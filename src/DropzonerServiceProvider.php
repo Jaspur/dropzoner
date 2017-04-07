@@ -1,4 +1,4 @@
-<?php namespace Codingo\Dropzoner;
+<?php namespace Jaspur\Dropzoner;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -10,18 +10,17 @@ class DropzonerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(realpath(__DIR__.'/../views'), 'dropzoner');
+        $this->loadViewsFrom(realpath(__DIR__ . '/../views'), 'dropzoner');
         $this->setupRoutes($this->app->router);
 
-        $this->publishes([__DIR__.'/config/dropzoner.php' => config_path('dropzoner.php')]);
-        $this->publishes([__DIR__.'/../assets' => public_path('vendor/dropzoner')], 'public');
+        $this->publishes([__DIR__ . '/config/dropzoner.php' => config_path('dropzoner.php')]);
+        $this->publishes([__DIR__ . '/../assets' => public_path('vendor/dropzoner')], 'public');
     }
 
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Codingo\Dropzoner\Http\Controllers'], function($router)
-        {
-            require __DIR__.'/Http/routes.php';
+        $router->group(['namespace' => 'Jaspur\Dropzoner\Http\Controllers'], function ($router) {
+            require __DIR__ . '/Http/routes.php';
         });
     }
 
@@ -33,7 +32,7 @@ class DropzonerServiceProvider extends ServiceProvider
 
     public function registerDropzoner()
     {
-        $this->app->bind('dropzoner', function($app){
+        $this->app->bind('dropzoner', function ($app) {
             return new Dropzoner($app);
         });
     }

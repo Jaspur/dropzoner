@@ -1,6 +1,6 @@
 <?php
 
-namespace Codingo\Dropzoner\Events;
+namespace Jaspur\Dropzoner\Events;
 
 abstract class Event
 {

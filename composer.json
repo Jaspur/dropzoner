@@ -1,21 +1,24 @@
 {
-  "name": "codingo-me/dropzoner",
-  "description": "Simpe Laravel package for image uploads using DropzoneJS library",
+  "name": "jaspur/dropzoner-file",
+  "description": "Simpe Laravel package for file uploads using DropzoneJS library",
   "keywords":["laravel", "dropzone"],
   "license":"MIT",
   "authors": [
     {
       "name": "Ivan Radunovic",
       "email": "ivan@codingo.me"
+    },
+    {
+      "name": "Jasper Koers",
+      "email": "jasper@coding.agency"
     }
   ],
   "require": {
-    "php": ">=5.4.0",
-    "intervention/image": "^2.3"
+    "php": ">=5.4.0"
   },
   "autoload":{
     "psr-4": {
-        "Codingo\\Dropzoner\\": "src/"
+        "Jaspur\\Dropzoner\\": "src/"
     }
   }
 }
