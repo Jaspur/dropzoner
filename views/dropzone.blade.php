@@ -2,6 +2,7 @@
 
     <form action='<?php echo route("dropzoner.upload") ?>' class='dropzone' id="dropzonersDropzone">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <input type="hidden" name="id" value="<?php echo @$id; ?>">
 
         <div class="dz-message"></div>
 
