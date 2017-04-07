@@ -35,7 +35,7 @@ class UploadRepository
         $filename         = $this->sanitize($original_name_without_extension);
         $allowed_filename = $this->createUniqueFilename($filename);
 
-        $filename_with_extension = $allowed_filename . '.' . $extension;
+        $filename_with_extension = str_random() . $allowed_filename . '.' . $extension;
 
         $file->storeAs(config('dropzoner.upload-path'), $filename_with_extension);
 
