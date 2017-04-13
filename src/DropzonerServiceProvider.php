@@ -10,7 +10,8 @@ class DropzonerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(realpath(__DIR__ . '/../views'), 'dropzoner');
+
+        $this->loadViewsFrom(realpath(__DIR__ . '/../views'), 'dropzoner', __DIR__);
         $this->setupRoutes($this->app->router);
 
         $this->publishes([__DIR__ . '/config/dropzoner.php' => config_path('dropzoner.php')]);
@@ -32,8 +33,16 @@ class DropzonerServiceProvider extends ServiceProvider
 
     public function registerDropzoner()
     {
-        $this->app->bind('dropzoner', function ($app) {
-            return new Dropzoner($app);
+        $this->app->singleton('dropzoner', function ($app) {
+            return new Dropzoner;
         });
+        // $this->app->bind('dropzoner', function ($app) {
+        //     return new Dropzoner($app);
+        // });
+    }
+
+    public function provides()
+    {
+        return ['dropzoner'];
     }
 }
